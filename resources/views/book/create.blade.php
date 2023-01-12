@@ -1,14 +1,18 @@
 @extends('layouts.layout')
 @section('content')
+    @if(session('message'))
+        <p class="text-center mt-3 text-success">{{session('message')}}</p>
+    @endif
     <h1 class="text-center mt-3">Add Books</h1>
-    <form onsubmit="createBook(event, this)">
+    <form action="{{route('book.store')}}" method="POST">
+        @csrf
         <div class="col-lg-12 d-flex justify-content-center align-items-center mt-5">
             <div class="col-lg-8">
                 <div class="input-group mb-3 col-lg-12">
                     <input type="text" name="name" class="form-control" placeholder="Book" aria-label="Book">
                 </div>
                 <div class="form-group mb-3">
-                    <select class="authors form-control" name="authors[]" multiple="multiple">
+                    <select class="select2 authors form-control" name="authors[]" multiple="multiple">
                         @foreach ($authors as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -20,7 +24,4 @@
             </div>
         </div>
     </form>
-@endsection
-@section('scripts')
-    <script src="{{ asset('assets/js/books.js') }}"></script>
 @endsection

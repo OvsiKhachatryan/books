@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Authors extends Model
+class Book extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
     public $timestamps = false;
 
-    public function books(){
-        return $this->belongsToMany(Books::class, 'book_authors', 'author_id', 'book_id');
+    public function authors(){
+        return $this->belongsToMany(Author::class, 'book_authors', 'book_id', 'author_id');
     }
 }

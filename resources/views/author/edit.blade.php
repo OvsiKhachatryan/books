@@ -1,7 +1,12 @@
 @extends('layouts.layout')
 @section('content')
+    @if(session('message'))
+        <p class="text-center mt-3 text-success">{{session('message')}}</p>
+    @endif
     <h1 class="text-center mt-3">Edit Authors</h1>
-    <form onsubmit="editAuthor(event, this)">
+    <form action="{{route('author.update', $author->id) }}" method="POST">
+        @method('PUT')
+        @csrf
         <input type="hidden" value="{{ $author->id }}" name="id">
         <div class="col-lg-12 d-flex justify-content-center align-items-center mt-5">
             <div class="col-lg-8">
@@ -15,7 +20,4 @@
             </div>
         </div>
     </form>
-@endsection
-@section('scripts')
-    <script src="{{ asset('assets/js/authors.js') }}"></script>
 @endsection

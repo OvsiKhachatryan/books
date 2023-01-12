@@ -27,15 +27,14 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
     });
 </script>
-<script src="{{asset('assets/js/global.js')}}"></script>
-@yield('scripts')
 
 </body>
 

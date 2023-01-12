@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Authors;
+use App\Models\Author;
 use Illuminate\Database\Eloquent\Model;
 
 class AuthorsService {
     public function create($name)
     {
-        $authors = new Authors;
+        $authors = new Author;
         $authors->name = $name;
         $authors->save();
 
@@ -17,7 +17,7 @@ class AuthorsService {
 
     public function edit($id, $name)
     {
-        $authors = Authors::find($id);
+        $authors = Author::find($id);
         $authors->update(['name' => $name]);
 
         return $authors;
@@ -25,7 +25,7 @@ class AuthorsService {
 
     public function getWithSort($search = "", $column = "id", $sort = "ASC", $pagination = 5)
     {
-        $authors = Authors::with("books");
+        $authors = Author::with("books");
 
         if($search != ""){
             $authors->where('name', 'LIKE', '%' . $search . '%');
@@ -38,17 +38,17 @@ class AuthorsService {
 
     public function get()
     {
-        return Authors::with('books')->get();
+        return Author::with('books')->get();
     }
 
     public function getById($id)
     {
-        return Authors::with('books')->find($id);
+        return Author::with('books')->find($id);
     }
 
     public function delete($id)
     {
-        return Authors::find($id)->delete();
+        return Author::find($id)->delete();
     }
 }
 
